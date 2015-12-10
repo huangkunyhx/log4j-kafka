@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <!-- debug -->
+  <appender name="dailyBebugFile" class="com.unionpaysmart.log4j.kafka.KafkaLog4jAppender">
+    <param name="Threshold" value="debug"></param>
+
+    <param name="application" value="test"></param>
+    <param name="servers" value="warwick01:9092,warwick02:9092,warwick03:9092"></param>
+    <param name="topic" value="TEST-TOPIC"></param>
+
+    <param name="acks" value="0"></param>
+    <param name="retries" value="1"></param>
+    <layout class="org.apache.log4j.PatternLayout" />
+  </appender>
+
+  <!-- 输出日志到控制台 ConsoleAppender -->
+  <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="info"></param>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %p [%t] [%M:%F] %c %x: %m%n"></param>
+    </layout>
+  </appender>
+
+  <root>
+    <priority value="debug" />
+    <appender-ref ref="stdout" /> 
+    <appender-ref ref="dailyBebugFile" /> 
+<!--
+-->
+  </root>
+</log4j:configuration> 
